@@ -1,3 +1,102 @@
-h1 {
-    color: red;
+@font-face {
+    font-family: 'Qanelas';
+    src: url('/public/fonts/Qanelas.ttf')
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Qanelas' sans-serif;
+    background-color: #1e2538;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.trailers {
+    padding: 40px 0;
+}
+
+.trailers__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.trailers__left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.trailers__title {
+    color: #fff;
+    font-size: 45px;
+    font-weight: 900;
+}
+
+.trailers__share {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.trailers__share-btn {
+    margin-top: 5px;
+}
+
+.trailers__votes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.trailers__vote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+}
+
+.trailers__swiper {
+    width: 1440px;
+    padding-bottom: 35px !important;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    cursor: pointer;
+}
+
+.swiper-slide__title {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.3;
+}
+
+.swiper-scrollbar {
+    height: 7px !important;
+}
+
+.swiper-scrollbar-drag {
+    background: #3657cb !important;
 }

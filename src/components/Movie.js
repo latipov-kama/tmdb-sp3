@@ -19,12 +19,6 @@ const movieGenres = {
     10752: " War",
     37: " Western"
 };
-function normalizeRating(number) {
-    const maxValue = 1000; 
-    let rating = (number / maxValue) * 10;
-    if (rating > 10) rating = 10;
-    return rating.toFixed(1);
-}
 export function Movie(item) {
 
     const movieCard = document.createElement("div");
@@ -42,7 +36,7 @@ export function Movie(item) {
     // rating
     const rating = document.createElement("div");
     rating.className = "rating";
-    rating.textContent = normalizeRating(item.popularity);
+    rating.textContent = item.vote_average.toFixed(1);
 
     // movie-info
     const movieInfo = document.createElement("div");

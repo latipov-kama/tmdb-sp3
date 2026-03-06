@@ -10,6 +10,7 @@ import { Movie } from "../../components/Movie";
 import { header } from '../../components/header';
 import { footer } from '../../components/footer';
 import { genres } from '../../components/genres';
+import {Trailer} from '../../components/Trailer';
 header()
 footer()
 
@@ -58,6 +59,9 @@ let upcomig_movies_page = document.querySelector(".upcoming-movies-page")
 let search_waindow_btn = document.querySelector(".search")
 let search_waindow = document.querySelector(".overhide")
 let close_search_window = document.querySelector(".close-search-window")
+
+let swiper_wrapper = document.querySelector(".swiper-wrapper")
+
 
 search_waindow_btn.onclick = () => {
     search_waindow.classList.add("show")
@@ -128,6 +132,8 @@ api.get("/genre/movie/list")
 api.get("/movie/upcoming")
     .then(res => {
         render(res.data.results.slice(0, 4), upcomig_movies_box, Movie)
+        render(res.data.results, swiper_wrapper, Trailer)
+
 
         upcomig_movies_next_btn.onclick = () => {
             let movies = res.data.results

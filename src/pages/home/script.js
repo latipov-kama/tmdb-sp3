@@ -128,6 +128,7 @@ api.get("/genre/movie/list")
 api.get("/movie/upcoming")
     .then(res => {
         render(res.data.results.slice(0, 4), upcomig_movies_box, Movie)
+        render()
 
         upcomig_movies_next_btn.onclick = () => {
             let movies = res.data.results

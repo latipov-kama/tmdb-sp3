@@ -1,6 +1,4 @@
-.app {
-    background-color: #1E2538;
-}
+
 
 body {
     padding-top: 30px;
@@ -748,7 +746,7 @@ header {
     position: absolute;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     top: 0;
 }
@@ -822,12 +820,13 @@ header {
 }
 
 .close-search-window {
-    position: absolute;
-    top: 95px;
     width: 30px;
-    left: 1280px;
+    
 }
+.search-box{
+    display: flex;
 
+}
 .hide {
     display: none;
 }

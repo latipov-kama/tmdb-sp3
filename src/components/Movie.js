@@ -76,5 +76,8 @@ export function Movie(item) {
     movieCard.appendChild(poster);
     movieCard.appendChild(movieInfo);
 
+    movieCard.onclick = () => {
+        window.location.href ="/src/pages/movie/index.html"
+    }
     return movieCard
 }

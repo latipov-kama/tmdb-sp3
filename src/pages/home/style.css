@@ -261,11 +261,11 @@ header {
 }
 
 .search {
-    width: 40px;
-    height: 40px;
+    width: 49px;
+    height: 42px;
     border-radius: 8px;
     border: none;
-    background-color: #2b344b;
+    background-color: white;
     cursor: pointer;
     position: relative;
 }
@@ -747,7 +747,7 @@ img {
 }
 
 /* form */
-.search-container {
+/* .search-container {
     display: flex;
     position: absolute;
     align-items: center;
@@ -836,4 +836,254 @@ img {
 
 .show {
     display: flex;
+} */
+ /* затемнение */
+.overhide {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 90px;
+}
+
+/* контейнер */
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* лого */
+.serch-logo-title {
+    margin-bottom: 15px;
+    font-size: 26px;
+    font-weight: 800;
+    text-decoration: none;
+    color: #4c6fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.serch-logo-title span {
+    color: #fff;
+}
+
+/* поиск */
+.search-box {
+    position: relative;
+    width: 720px;
+}
+
+/* input */
+.search-content {
+    width: 100%;
+    height: 70px;
+    border-radius: 14px;
+    border: none;
+    outline: none;
+    padding: 0 140px 0 25px;
+    font-size: 20px;
+    background: #e9e9e9;
+    font-weight: 500;
+}
+
+/* иконки справа */
+.search-icons {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* фильтр */
+
+/* кнопка поиска */
+.search-btn {
+    width: 65px;
+    height: 55px;
+    border: none;
+    border-radius: 12px;
+    background: #ffe500;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* крестик */
+.close-search-window {
+    position: absolute;
+    right: -60px;
+    top: 60px;
+    width: 30px;
+    cursor: pointer;
+}
+
+/* hide/show */
+.hide {
+    display: none;
+}
+.show {
+    display: flex;
+}
+/* overlay */
+.login-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(3px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* показать */
+.login-modal.show {
+    display: flex;
+}
+
+/* окно */
+.login-box {
+    width: 480px;
+    background: #141c2f;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+}
+
+/* крестик */
+.login-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 22px;
+    cursor: pointer;
+}
+
+/* logo */
+.login-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    font-weight: 800;
+    font-size: 22px;
+    color: #4c6fff;
+    text-decoration: none;
+}
+
+.login-logo span {
+    color: white;
+}
+
+/* title */
+.login-box h2 {
+    color: white;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+/* inputs */
+.login-box input {
+    width: 100%;
+    height: 55px;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 15px;
+    padding: 0 15px;
+    background: #1f2a44;
+    color: white;
+    font-size: 15px;
+}
+
+/* login btn */
+.login-btn-main {
+    width: 100%;
+    height: 55px;
+    border-radius: 12px;
+    border: none;
+    background: #f3f300;
+    font-weight: 700;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* signup */
+.signup-btn {
+    width: 100%;
+    height: 55px;
+    border-radius: 12px;
+    border: none;
+    background: #1f2a44;
+    color: white;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+/* reset */
+.reset {
+    display: block;
+    margin-top: 15px;
+    color: #4c6fff;
+    text-decoration: none;
+}
+
+/* socials */
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.socials div {
+    width: 42px;
+    height: 42px;
+    background: #1f2a44;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+}
+.password-box {
+    position: relative;
+    width: 100%;
+}
+
+.password-box input {
+    width: 100%;
+    height: 55px;
+    border-radius: 12px;
+    border: none;
+    padding: 0 45px 0 15px;
+    background: #1f2a44;
+    color: white;
+    font-size: 15px;
+}
+
+/* глаз */
+.toggle-pass {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0.8;
 }

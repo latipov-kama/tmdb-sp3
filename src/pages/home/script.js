@@ -163,3 +163,32 @@ api.get("/movie/upcoming")
             render(movies.slice(first, second), upcomig_movies_box, Movie);
         }
     })
+
+const loginBtn = document.querySelector(".login");
+const modal = document.getElementById("loginModal");
+const closeBtn = document.querySelector(".login-close");
+
+loginBtn.onclick = () => modal.classList.add("show");
+
+closeBtn.onclick = () => modal.classList.remove("show");
+
+window.onclick = (e) => {
+    if (e.target === modal) modal.classList.remove("show");
+};
+
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") modal.classList.remove("show");
+});
+
+const togglePass = document.getElementById("togglePass");
+const passwordInput = document.getElementById("passwordInput");
+
+togglePass.onclick = () => {
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePass.textContent = "🙈";
+    } else {
+        passwordInput.type = "password";
+        togglePass.textContent = "👁️";
+    }
+};

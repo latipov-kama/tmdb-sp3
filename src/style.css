@@ -12,11 +12,6 @@
 
 }
 
-.container {
-  padding: 0 30px;
-  max-width: 1430px;
-  margin: 0 auto;
-}
 
 body {
   margin: 0;
@@ -25,10 +20,82 @@ body {
   background-color: #1E2538;
 }
 
+.container {
+  max-width: 1430px;
+  margin: 0 auto;
+  /* padding: 40px 20px; */
+
+
+}
+
+.footer {
+  background: #0f172a;
+  padding: 60px 20px 50px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.footer__socials {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.footer__socials a {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.footer__socials a:hover {
+  background: #4f7cff;
+}
+
+.footer__menu {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 35px;
+}
+
+.footer__menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.footer__copyright {
+  color: #94a3b8;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.footer__links a {
+  color: #94a3b8;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.footer__links a:hover {
+  color: white;
+}
+
 header {
   width: 100%;
   margin-bottom: 40px;
-  background-color: #1e2638;
+  position: relative;
+  z-index: 50;
 }
 
 .head-cn {
@@ -39,7 +106,7 @@ header {
 
 /* LEFT */
 
-.left-top {
+.header-left-top {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -63,7 +130,7 @@ header {
   font-size: 19px;
 }
 
-.left-top ul {
+.header-left-top ul {
   display: flex;
   list-style: none;
   gap: 15px;
@@ -108,7 +175,7 @@ header {
 
 /* RIGHT */
 
-.right {
+.header-right {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -149,19 +216,4 @@ header {
 .login:hover {
   opacity: 0.7;
   background-color: #263d8f;
-}
-
-
-
-.title {
-  font-size: 40px;
-  font-weight: 800;
-  color: #fff;
-}
-
-
-.search-category {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 600;
 }

@@ -69,24 +69,24 @@ close_search_window.onclick = () => {
     search_waindow.classList.add("hide")
 }
 
-let popularApi = api.get("/person/popular")
-let popularMovies = api.get("movie/popular")
-let movieGenre = document.querySelector(".genres")
-let genresApi = api.get("/genre/movie/list")
+
 let swiperWrapper = document.querySelector(".swiper-wrapper")
-let upcomingMovies = api.get("/movie/upcoming")
-
-Promise.all([popularApi, popularMovies, genresApi, upcomingMovies])
-    .then(([peopleRes, popularRes, genresRes, upcomingRes]) => {
-        render(peopleRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
-        render(peopleRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
-
-        render(popularRes.data.results, cardBox, Movie)
-        render(popularRes.data.results.slice(0, 4), popular_movies_box, Movie)
-
-        render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
-
-        render(upcomingRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
-        render(upcomingRes.data.results, swiperWrapper, Trailer)
-    })
-    .catch(err => console.error(err))
+let personApi = api.get("/person/popular")
+let popularMovieApi = api.get("movie/popular")
+let genresApi = api.get("/genre/movie/list")
+let upcomigMovieApi = api.get("/movie/upcoming")
+Promise.all([personApi, popularMovieApi, genresApi, upcomigMovieApi])
+.then(([personRes, popularMovieRes, genresRes, upcomigMovieRes])=>{
+    console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
+    
+    render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
+    render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
+    
+    render(popularMovieRes.data.results, cardBox, Movie)
+    render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
+    
+    render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
+    render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
+    
+    render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
+ })

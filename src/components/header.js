@@ -41,4 +41,17 @@ export function header() {
             <button class="login"></button>
         </div>
     </div>`
+    
+    let search_waindow_btn = document.querySelector(".search")
+    let search_waindow = document.querySelector(".overhide")
+    let close_search_window = document.querySelector(".close-search-window")
+
+    search_waindow_btn.onclick = () => {
+        search_waindow.classList.add("show")
+        search_waindow.classList.remove("hide")
+    }
+    close_search_window.onclick = () => {
+        search_waindow.classList.remove("show")
+        search_waindow.classList.add("hide")
+    }
 }

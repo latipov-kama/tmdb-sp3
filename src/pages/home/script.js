@@ -56,18 +56,18 @@ let upcomig_movies_next_btn = document.querySelector(".upcoming-movies-next-btn"
 let upcomig_movies_last_btn = document.querySelector(".upcoming-movies-last-btn")
 let upcomig_movies_page = document.querySelector(".upcoming-movies-page")
 
-let search_waindow_btn = document.querySelector(".search")
-let search_waindow = document.querySelector(".overhide")
-let close_search_window = document.querySelector(".close-search-window")
+// let search_waindow_btn = document.querySelector(".search")
+// let search_waindow = document.querySelector(".overhide")
+// let close_search_window = document.querySelector(".close-search-window")
 
-search_waindow_btn.onclick = () => {
-    search_waindow.classList.add("show")
-    search_waindow.classList.remove("hide")
-}
-close_search_window.onclick = () => {
-    search_waindow.classList.remove("show")
-    search_waindow.classList.add("hide")
-}
+// search_waindow_btn.onclick = () => {
+//     search_waindow.classList.add("show")
+//     search_waindow.classList.remove("hide")
+// }
+// close_search_window.onclick = () => {
+//     search_waindow.classList.remove("show")
+//     search_waindow.classList.add("hide")
+// }
 
 
 let swiperWrapper = document.querySelector(".swiper-wrapper")

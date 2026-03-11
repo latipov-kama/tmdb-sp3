@@ -76,17 +76,37 @@ let popularMovieApi = api.get("movie/popular")
 let genresApi = api.get("/genre/movie/list")
 let upcomigMovieApi = api.get("/movie/upcoming")
 Promise.all([personApi, popularMovieApi, genresApi, upcomigMovieApi])
-.then(([personRes, popularMovieRes, genresRes, upcomigMovieRes])=>{
-    console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
-    
-    render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
-    render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
-    
-    render(popularMovieRes.data.results, cardBox, Movie)
-    render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
-    
-    render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
-    render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
-    
-    render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
- })
+    .then(([personRes, popularMovieRes, genresRes, upcomigMovieRes]) => {
+        // console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
+        render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
+        render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
+
+        render(popularMovieRes.data.results, cardBox, Movie)
+        render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
+
+        render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
+        render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
+
+        render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
+    })
+
+
+let searchTypes = document.querySelectorAll(".type")
+let searchInp = document.querySelector('.search-content')
+
+function changeType(type) {
+    console.log(type);
+
+    searchInp.onkeyup = () => {
+        api.get(`/search/${type}?query=${searchInp.value}`)
+            .then(res => console.log(res))
+    }
+
+}
+changeType('movie')
+
+searchTypes.forEach((type, i) => {
+    type.onclick = () => {
+        changeType(type.id)
+    }
+})

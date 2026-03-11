@@ -2,7 +2,7 @@ import { movieGenres } from "./Movie"
 
 let container = document.querySelector(".container")
 export function DetailedMovie(item) {
-    container.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${item.poster_path})`;
+    container.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${item.backdrop_path})`;
     let parentBox = document.createElement("div")
     parentBox.className = "parent-box"
     let bottomContainer = document.createElement("div")
@@ -64,9 +64,9 @@ export function DetailedMovie(item) {
         "Time: "+item.runtime,
         "Slogan: "+item.tagline,
         "MPAA Rating: R",
-        "Genre: "+item.genres.map(id => movieGenres[id] || "Unknown"),
+        "Genre: "+item.genres.map(item => movieGenres[item.id] || "Unknown"),
         "Year: "+item.release_date.slice(0,4),
-        "Country: "+Object.values(item.production_countries)[0],
+        "Country: "+item.production_countries.map(item => item.name),
         "Production: Chris Hemsworth",
         "Camera: Erik Wilson",
         "Art: Scott Dougan",

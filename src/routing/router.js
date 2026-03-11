@@ -18,7 +18,7 @@ export async function router() {
 async function renderNotFoundPage(app) {
     console.log(app);
 
-    const response = await fetch('src/pages/404/index.html')
+    const response = await fetch('src/pages/error/index.html')
     const page = await response.text()
 
     app.innerHTML = page

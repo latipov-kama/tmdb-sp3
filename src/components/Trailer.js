@@ -1,4 +1,4 @@
-import {api} from "../libs/api"
+import { api } from "../libs/api"
 
 export function Trailer(item) {
     const slide = document.createElement("div")
@@ -16,11 +16,16 @@ export function Trailer(item) {
 
     let iframe = document.querySelector(".new-trailer-video iframe")
 
+    let trailersTitle = document.querySelector(".trailers__title")
+
     slide.onclick = () => {
+        console.log(item);
+
         api.get(`/movie/${item.id}/videos`)
             .then(res => {
                 let trailer = res.data.results.find(item => item.type == "Trailer")
 
+                trailersTitle.textContent = item.title
                 iframe.src = `https://www.youtube.com/embed/${trailer.key}`
             })
     }

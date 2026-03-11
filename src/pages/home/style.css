@@ -624,7 +624,9 @@ body {
 
 .close-search-window {
     width: 30px;
-    
+    position: absolute;
+    right: 610px;
+    top: 95px;
 }
 .search-box{
     display: flex;

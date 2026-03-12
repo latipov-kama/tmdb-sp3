@@ -26,5 +26,5 @@ export const routes = [
         loadScripts: async () => {
             await import("../pages/movie/script.js")
         }
-    }
+    },
 ]

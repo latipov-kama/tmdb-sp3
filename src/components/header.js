@@ -66,8 +66,3 @@ export function header() {
     headerRight.appendChild(loginBtn);
     headCn.append(headerRight)
 }
-// let search_waindow_btn = document.querySelector(".search")
-// let search_waindow = document.querySelector(".overhide")
-
-// search_waindow_btn.onclick = () => {
-// }

@@ -1,22 +1,43 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/tmdb-sp3/public/cinema.png" />
-    <meta http-equiv="Permissions-Policy" content="compute-pressure=()">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/tmdb-sp3/public/cinema.png" />
+  <meta http-equiv="Permissions-Policy" content="compute-pressure=()">
 
-    <title>Kinoarea</title>
-  </head>
-  <body>
-    
-    <div id="app">
-      
-    </div>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+  <title>Kinoarea</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="overhide hide">
+
+      <div class="search-container">
+        
+        <a href="/" class="serch-logo-title"><img src="https://kinoarea.com/front/img/logo-icon.svg" width="30px"
+          height="30px" alt="">Kino<span>area</span></a>
+          
+          <input type="text" placeholder="Search" class="search-content" id="search-content" name="searching">
+          <div class="search-box">
+            
+            <button class="search-btn">🔍</button>
+            <img src="https://kinoarea.com/front/img/icons/close-menu.svg" alt="" class="close-search-window">
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

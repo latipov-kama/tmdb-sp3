@@ -93,13 +93,14 @@ header {
     width: 100%;
     margin-bottom: 40px;
     position: relative;
-    z-index: 50;
+    z-index: 20;
 }
 
 .head-cn {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 /* LEFT */
@@ -186,7 +187,9 @@ header {
     border: none;
     background-color: #2b344b;
     cursor: pointer;
-    position: relative;
+    /* position: relative; */
+    position: absolute;
+    right: 100px;
 }
 
 .search::before {

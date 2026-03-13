@@ -9,9 +9,7 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-
 }
-
 
 body {
     margin: 0;
@@ -24,8 +22,6 @@ body {
     max-width: 1430px;
     margin: 0 auto;
     /* padding: 40px 20px; */
-
-
 }
 
 .footer {

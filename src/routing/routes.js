@@ -2,7 +2,7 @@ export const routes = [
     {
         path: /^\/$/,
         view: async (app) => {
-            const response = await fetch('src/pages/home/index.html')
+            const response = await fetch('/pages/home/index.html')
 
             app.innerHTML = await response.text()
         },
@@ -16,7 +16,7 @@ export const routes = [
     {
         path: /^\/movie$/,
         view: async (app) => {
-            const response = await fetch('src/pages/movie/index.html')
+            const response = await fetch('/pages/movie/index.html')
 
             app.innerHTML = await response.text()
         },
@@ -28,3 +28,17 @@ export const routes = [
         }
     },
 ]
+
+export const notFound = {
+    view: async (app) => {
+        const response = await fetch('/pages/error/index.html')
+
+        app.innerHTML = await response.text()
+    },
+    loadStyles: async () => {
+        await import("../pages/error/style.css")
+    },
+    loadScripts: async () => {
+        await import("../pages/error/script.js")
+    }
+}

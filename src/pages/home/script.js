@@ -9,7 +9,10 @@ import { api } from '../../libs/api';
 import { Movie } from "../../components/Movie";
 import { header } from '../../components/header';
 import { footer } from '../../components/footer';
-import { genres } from '../../components/genres';
+import { Trailer } from '../../components/Trailer';
+import { genres } from '../../components/Genres';
+import { SearchMovie } from '../../components/searchMovie';
+import { searchPerson } from '../../components/searchPerson';
 header()
 footer()
 
@@ -21,7 +24,6 @@ const swiper = new Swiper('.trailers__swiper', {
     slidesPerView: 4,
     spaceBetween: 20,
     grabCursor: true,
-
     //   resistanceRatio: 0,
 
     freeMode: {
@@ -55,140 +57,66 @@ let upcomig_movies_next_btn = document.querySelector(".upcoming-movies-next-btn"
 let upcomig_movies_last_btn = document.querySelector(".upcoming-movies-last-btn")
 let upcomig_movies_page = document.querySelector(".upcoming-movies-page")
 
-let search_waindow_btn = document.querySelector(".search")
-let search_waindow = document.querySelector(".overhide")
-let close_search_window = document.querySelector(".close-search-window")
 
-search_waindow_btn.onclick = () => {
-    search_waindow.classList.add("show")
-    search_waindow.classList.remove("hide")
-}
-close_search_window.onclick = () => {
-    search_waindow.classList.remove("show")
-    search_waindow.classList.add("hide")
-}
+// let search_waindow_btn = document.querySelector(".search")
+// let search_waindow = document.querySelector(".overhide")
+// let close_search_window = document.querySelector(".close-search-window")
 
-let first = 0
-let second = 4
-let page = 1
+// search_waindow_btn.onclick = () => {
+//     search_waindow.classList.add("show")
+//     search_waindow.classList.remove("hide")
+// }
+// close_search_window.onclick = () => {
+//     search_waindow.classList.remove("show")
+//     search_waindow.classList.add("hide")
+// }
 
-api.get("/person/popular")
-    .then(res => {
-        render(res.data.results.slice(0, 2), popular_people_box1, popularPeople)
-        render(res.data.results.slice(2, 6), popular_people_box2, popularPeoples)
-    })
+let swiperWrapper = document.querySelector(".swiper-wrapper")
+let personApi = api.get("/person/popular")
+let popularMovieApi = api.get("movie/popular")
+let genresApi = api.get("/genre/movie/list")
+let upcomigMovieApi = api.get("/movie/upcoming")
+Promise.all([personApi, popularMovieApi, genresApi, upcomigMovieApi])
+.then(([personRes, popularMovieRes, genresRes, upcomigMovieRes])=>{
+    console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
+    
+    render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
+    render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
+    
+    render(popularMovieRes.data.results, cardBox, Movie)
+    render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
+    
+    render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
+    render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
+    
+    render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
+ })
+ let searchTypes = document.querySelectorAll(".type")
+let searchInp = document.querySelector('.search-content')
+let searchResults = document.querySelector(".render-box")
 
+function changeType(type) {
+    console.log(type);
 
-api.get("movie/popular")
-    .then(res => {
-        render(Object.values(res.data.results), cardBox, Movie)
-    })
-api.get("movie/popular")
-    .then(res => {
-        render(Object.values(res.data.results).slice(0, 4), popular_movies_box, Movie)
-
-        popular_movies_next_btn.onclick = () => {
-            let movies = Object.values(res.data.results)
-            first += 4;
-            second += 4;
-            page += 1;
-            popular_movies_page.textContent = page
-
-            if (first > 12) {
-                first = 0;
-                second = 4;
-                page = 1;
-                popular_movies_page.textContent = page
-            }
-
-            render(movies.slice(first, second), popular_movies_box, Movie);
-        }
-        popular_movies_last_btn.onclick = () => {
-            let movies = Object.values(res.data.results)
-            first -= 4;
-            second -= 4;
-            page -= 1;
-            popular_movies_page.textContent = page
-
-            if (first < 0) {
-                first = 12;
-                second = 16;
-                page = 4;
-                popular_movies_page.textContent = page
-            }
-
-            render(movies.slice(first, second), popular_movies_box, Movie);
-        }
-
-    })
-api.get("/genre/movie/list")
-    .then(res => {
-        render(res.data.genres.slice(0, 6), geanre_list, genres)
-    })
-api.get("/movie/upcoming")
-    .then(res => {
-        render(res.data.results.slice(0, 4), upcomig_movies_box, Movie)
-        render()
-
-        upcomig_movies_next_btn.onclick = () => {
-            let movies = res.data.results
-            first += 4;
-            second += 4;
-            page += 1;
-            upcomig_movies_page.textContent = page
-
-            if (first > 8) {
-                first = 0;
-                second = 4;
-                page = 1;
-                upcomig_movies_page.textContent = page
-            }
-
-            render(movies.slice(first, second), upcomig_movies_box, Movie);
-        }
-        upcomig_movies_last_btn.onclick = () => {
-            let movies = Object.values(res.data.results)
-            first -= 4;
-            second -= 4;
-            page -= 1;
-            upcomig_movies_page.textContent = page
-
-            if (first < 0) {
-                first = 8;
-                second = 12;
-                page = 3;
-                upcomig_movies_page.textContent = page
-            }
-
-            render(movies.slice(first, second), upcomig_movies_box, Movie);
-        }
-    })
-
-const loginBtn = document.querySelector(".login");
-const modal = document.getElementById("loginModal");
-const closeBtn = document.querySelector(".login-close");
-
-loginBtn.onclick = () => modal.classList.add("show");
-
-closeBtn.onclick = () => modal.classList.remove("show");
-
-window.onclick = (e) => {
-    if (e.target === modal) modal.classList.remove("show");
-};
-
-document.addEventListener("keydown", e => {
-    if (e.key === "Escape") modal.classList.remove("show");
-});
-
-const togglePass = document.getElementById("togglePass");
-const passwordInput = document.getElementById("passwordInput");
-
-togglePass.onclick = () => {
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        togglePass.textContent = "🙈";
-    } else {
-        passwordInput.type = "password";
-        togglePass.textContent = "👁️";
+    searchInp.onkeyup = () => {
+        api.get(`/search/${type}?query=${searchInp.value}`)
+            .then(res => {
+                console.log(res.data);
+                if(type == "movie"){
+                    render(Object.values(res.data.results), searchResults, SearchMovie)
+                } else if(type == "person") {
+                    render(Object.values(res.data.results), searchResults, searchPerson)
+                } else {
+                    render(Object.values(res.data.results), searchResults, SearchMovie)
+                }
+            })
     }
-};
+
+}
+changeType('movie')
+
+searchTypes.forEach((type, i) => {
+    type.onclick = () => {
+        changeType(type.id)
+    }
+})

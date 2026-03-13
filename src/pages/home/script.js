@@ -10,7 +10,7 @@ import { Movie } from "../../components/Movie";
 import { header } from '../../components/header';
 import { footer } from '../../components/footer';
 import { Trailer } from '../../components/Trailer';
-import { genres } from '../../components/Genres';
+import { genres } from '../../components/genres';
 import { SearchMovie } from '../../components/searchMovie';
 import { searchPerson } from '../../components/searchPerson';
 header()
@@ -76,21 +76,21 @@ let popularMovieApi = api.get("movie/popular")
 let genresApi = api.get("/genre/movie/list")
 let upcomigMovieApi = api.get("/movie/upcoming")
 Promise.all([personApi, popularMovieApi, genresApi, upcomigMovieApi])
-.then(([personRes, popularMovieRes, genresRes, upcomigMovieRes])=>{
-    console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
-    
-    render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
-    render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
-    
-    render(popularMovieRes.data.results, cardBox, Movie)
-    render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
-    
-    render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
-    render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
-    
-    render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
- })
- let searchTypes = document.querySelectorAll(".type")
+    .then(([personRes, popularMovieRes, genresRes, upcomigMovieRes]) => {
+        console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
+
+        render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
+        render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
+
+        render(popularMovieRes.data.results, cardBox, Movie)
+        render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
+
+        render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
+        render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
+
+        render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
+    })
+let searchTypes = document.querySelectorAll(".type")
 let searchInp = document.querySelector('.search-content')
 let searchResults = document.querySelector(".render-box")
 
@@ -101,9 +101,9 @@ function changeType(type) {
         api.get(`/search/${type}?query=${searchInp.value}`)
             .then(res => {
                 console.log(res.data);
-                if(type == "movie"){
+                if (type == "movie") {
                     render(Object.values(res.data.results), searchResults, SearchMovie)
-                } else if(type == "person") {
+                } else if (type == "person") {
                     render(Object.values(res.data.results), searchResults, searchPerson)
                 } else {
                     render(Object.values(res.data.results), searchResults, SearchMovie)

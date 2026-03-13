@@ -1,7 +1,12 @@
-export function header() {
-    let box = document.querySelector("header")
+let close_search_window = document.querySelector(".close-search-window")
+let search_waindow = document.querySelector(".overhide")
+console.log(search_waindow);
+console.log(close_search_window);
 
-    box.innerHTML = `
+export function header() {
+    let header = document.querySelector("header")
+
+    header.innerHTML = `
     <div class="container head-cn">
         <div>
             <div class="header-left-top">
@@ -36,9 +41,28 @@ export function header() {
                 <li><a href="/" class="center-link">Search</a></li>
             </ul>
         </div>
-        <div class="header-right">
-            <button class="search"></button>
-            <button class="login"></button>
-        </div>
     </div>`
+    let headCn = document.querySelector(".head-cn")
+    const headerRight = document.createElement("div");
+    headerRight.className = "header-right";
+    
+    const searchBtn = document.createElement("button");
+    searchBtn.className = "search";
+    close_search_window.onclick = () => {
+        search_waindow.classList.remove("show")
+        search_waindow.classList.add("hide")
+    }
+    searchBtn.onclick = () => {
+        search_waindow.classList.add("show")
+        search_waindow.classList.remove("hide")
+            
+        console.log(1);
+        
+    }
+    const loginBtn = document.createElement("button");
+    loginBtn.className = "login";
+
+    headerRight.appendChild(searchBtn);
+    headerRight.appendChild(loginBtn);
+    headCn.append(headerRight)
 }

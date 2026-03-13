@@ -10,7 +10,6 @@ export function genres(item, arr) {
     btn.className = "search-category"
     btn.textContent = item.name
 
-    // Первый элемент активен по умолчанию
     if (arr.indexOf(item) === 0) {
         btn.classList.add("active")
     }

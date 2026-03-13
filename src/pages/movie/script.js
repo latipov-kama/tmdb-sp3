@@ -1,10 +1,10 @@
-import { DetailedMovie } from "../../components/detailedMovie";
-import { footer } from "../../components/footer";
-import { header } from "../../components/header";
-import { api } from "../../libs/api";
-import { render } from "../../libs/render";
-import { SearchMovie } from "../../components/searchMovie";
-import { searchPerson } from "../../components/searchPerson";
+import { DetailedMovie } from "../../components/detailedMovie"
+import { footer } from "../../components/footer"
+import { header } from "../../components/header"
+import { api } from "../../libs/api"
+import { render } from "../../libs/render"
+import { SearchMovie } from "../../components/searchMovie"
+import { searchPerson } from "../../components/searchPerson"
 
 header()
 footer()

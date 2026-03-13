@@ -39,13 +39,12 @@ export function header() {
     </div>`
 
     let headCn = document.querySelector(".head-cn")
-    const headerRight = document.createElement("div");
-    headerRight.className = "header-right";
+    const headerRight = document.createElement("div")
+    headerRight.className = "header-right"
 
-    const searchBtn = document.createElement("button");
-    searchBtn.className = "search";
+    const searchBtn = document.createElement("button")
+    searchBtn.className = "search"
 
-    // Query AFTER innerHTML is set
     let close_search_window = document.querySelector(".close-search-window")
     let search_waindow = document.querySelector(".overhide")
 

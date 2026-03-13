@@ -15,7 +15,7 @@ body {
 
     .link-right-box {
         display: flex;
-                align-items: center;
+        align-items: center;
         gap: 40px;
     }
 
@@ -178,7 +178,7 @@ body {
 
 .movie-card {
     /* position: relative; */
-    
+
     width: 100%;
     font-family: 'Segoe UI', sans-serif;
 }
@@ -565,7 +565,7 @@ body {
     font-weight: 700;
 }
 
-.search-container button {
+.search-btn {
     width: 50px;
     height: 48px;
     border: none;
@@ -577,9 +577,10 @@ body {
     font-size: 18px;
     transition: background 0.2s;
     border-radius: 10px;
+    /* left: 2700px; */
     position: absolute;
-    top: 86px;
-    left: 1202px;
+    left: 240px;
+    top: -54px;
 }
 
 .search-container button:hover {
@@ -593,7 +594,7 @@ body {
     font-weight: 800;
     text-decoration: none;
     color: #4c6fff;
-
+    
     img {
         width: 30px;
         margin-right: 3px;
@@ -604,6 +605,7 @@ body {
     color: #ffffff;
     font-size: 25px;
 }
+
 
 .overhide {
     position: fixed;
@@ -623,12 +625,17 @@ body {
 
 .close-search-window {
     width: 30px;
-    
+    position: absolute;
+    left: 320px;
+    top: -45px;
 }
-.search-box{
-    display: flex;
 
+
+.search-box {
+    display: flex;
+    position: relative;
 }
+
 .hide {
     display: none;
 }
@@ -653,11 +660,12 @@ body {
 .movie-card:hover .overlay {
     opacity: 1;
 }
+
 .moreBtn {
-  background: white;
-  border: none;
-  padding: 12px 32px;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
+    background: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
 }

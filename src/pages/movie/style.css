@@ -250,3 +250,29 @@ span {
     position: absolute;
     right: 100px;
 }
+/* hero — полноэкранная секция с фоном фильма */
+.hero {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Прозрачный хедер поверх фона */
+.hero header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    margin-bottom: 0;
+    z-index: 30;
+    padding: 20px 0;
+}
+
+/* Контент фильма — отступ сверху чтобы не уходить под хедер */
+.movie-content {
+    position: relative;
+    z-index: 20;
+    max-width: 1430px;
+    margin: 0 auto;
+    padding: 140px 20px 60px;
+}

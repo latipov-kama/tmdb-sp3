@@ -19,7 +19,6 @@ export function Trailer(item) {
     let trailersTitle = document.querySelector(".trailers__title")
 
     slide.onclick = () => {
-        console.log(item);
 
         api.get(`/movie/${item.id}/videos`)
             .then(res => {

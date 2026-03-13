@@ -170,8 +170,21 @@ body {
 
 .search-category {
     text-decoration: none;
-    color: #ffffff;
+    color: #888888;
     font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: color 0.2s;
+    user-select: none;
+}
+
+.search-category:hover {
+    color: #ffffff;
+}
+
+.search-category.active {
+    color: #ffffff;
 }
 
 /* ===== MOVIE CARD ===== */

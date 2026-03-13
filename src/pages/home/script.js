@@ -11,7 +11,7 @@ import { header } from '../../components/header';
 import { footer } from '../../components/footer';
 // import { genres } from '../../components/genres';
 import { Trailer } from '../../components/Trailer';
-import { genres } from '../../components/Genres';
+import { genres } from '../../components/genres';
 import { SearchMovie } from '../../components/searchMovie';
 import { searchPerson } from '../../components/searchPerson';
 header()
@@ -77,31 +77,60 @@ let personApi = api.get("/person/popular")
 let popularMovieApi = api.get("movie/popular")
 let genresApi = api.get("/genre/movie/list")
 let upcomigMovieApi = api.get("/movie/upcoming")
+let popularPage = 1
+let upcomingPage = 1
+
 Promise.all([personApi, popularMovieApi, genresApi, upcomigMovieApi])
 .then(([personRes, popularMovieRes, genresRes, upcomigMovieRes])=>{
-    console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
-    
     render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
     render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
-    
+
     render(popularMovieRes.data.results, cardBox, Movie)
     render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
-    
+
     render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
     render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
-    
+
     render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
- })
+})
+
+popular_movies_next_btn.onclick = () => {
+    popularPage++
+    popular_movies_page.textContent = popularPage
+    api.get(`/movie/popular?page=${popularPage}`)
+        .then(res => render(res.data.results.slice(0, 4), popular_movies_box, Movie))
+}
+
+popular_movies_last_btn.onclick = () => {
+    if (popularPage <= 1) return
+    popularPage--
+    popular_movies_page.textContent = popularPage
+    api.get(`/movie/popular?page=${popularPage}`)
+        .then(res => render(res.data.results.slice(0, 4), popular_movies_box, Movie))
+}
+
+upcomig_movies_next_btn.onclick = () => {
+    upcomingPage++
+    upcomig_movies_page.textContent = upcomingPage
+    api.get(`/movie/upcoming?page=${upcomingPage}`)
+        .then(res => render(res.data.results.slice(0, 4), upcomig_movies_box, Movie))
+}
+
+upcomig_movies_last_btn.onclick = () => {
+    if (upcomingPage <= 1) return
+    upcomingPage--
+    upcomig_movies_page.textContent = upcomingPage
+    api.get(`/movie/upcoming?page=${upcomingPage}`)
+        .then(res => render(res.data.results.slice(0, 4), upcomig_movies_box, Movie))
+}
  let searchTypes = document.querySelectorAll(".type")
 let searchInp = document.querySelector('.search-content')
 let searchResults = document.querySelector(".render-box")
 function changeType(type) {
-    console.log(type);
 
     searchInp.onkeyup = () => {
         api.get(`/search/${type}?query=${searchInp.value}`)
             .then(res => {
-                console.log(res.data);
                 if(type == "movie"){
                     render(Object.values(res.data.results), searchResults, SearchMovie)
                 } else if(type == "person") {

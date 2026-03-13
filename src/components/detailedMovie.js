@@ -1,15 +1,21 @@
 import { movieGenres } from "./Movie"
 
-let container = document.querySelector(".container")
-let bgBox = document.querySelector(".bg-box")
-
 export function DetailedMovie(item) {
+    let container = document.querySelector(".movie-content")
+    let bgBox = document.querySelector(".bg-box")
+
+    container.innerHTML = ""
 
     bgBox.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${item.backdrop_path})`;
+    bgBox.style.backgroundSize = "cover";
+    bgBox.style.backgroundPosition = "center";
+
     let parentBox = document.createElement("div")
     parentBox.className = "parent-box"
+
     let bottomContainer = document.createElement("div")
     bottomContainer.className = "bottomContainer"
+
     const left = document.createElement("div");
     left.className = "cn-movie-left";
 
@@ -22,22 +28,18 @@ export function DetailedMovie(item) {
     const right = document.createElement("div");
     right.className = "cn-movie-right";
 
-    /* navigation */
     const navigation = document.createElement("p");
     navigation.className = "navigation";
     navigation.textContent = `Home > Films > ${item.title}`;
 
-    /* title */
     const title = document.createElement("h3");
     title.className = "movie-title";
     title.textContent = item.title;
 
-    /* small title */
     const smallTitle = document.createElement("p");
     smallTitle.className = "movie-small-title";
-    smallTitle.textContent = `${item.title} ${item.release_date.slice(0, 4)}`;
+    smallTitle.textContent = `${item.title} (${item.release_date.slice(0, 4)})`;
 
-    /* diagrams buttons */
     const diagrams = document.createElement("div");
     diagrams.className = "diagrams";
 
@@ -47,49 +49,43 @@ export function DetailedMovie(item) {
         diagrams.appendChild(btn);
     }
 
-    /* description */
     const description = document.createElement("p");
     description.className = "description";
-    description.textContent = item.overview
+    description.textContent = item.overview;
 
-    /* trailer button */
     const trailerBtn = document.createElement("button");
     trailerBtn.className = "trailer-btn";
     trailerBtn.textContent = "Watch Trailer";
 
-    /* small data */
     const smallData = document.createElement("div");
     smallData.className = "small-data";
 
+    const productionCompanies = item.production_companies?.map(c => c.name).join(", ") || "—";
+    const budget = item.budget > 0 ? "$" + item.budget.toLocaleString() : "—";
+    const revenue = item.revenue > 0 ? "$" + item.revenue.toLocaleString() : "—";
+
     const data = [
-        "Premiere World: " + item.release_date,
-        "Premiere US: " + item.release_date,
-        "Time: " + item.runtime,
-        "Slogan: " + item.tagline,
-        "MPAA Rating: R",
-        "Genre: " + item.genres.map(item => movieGenres[item.id] || "Unknown"),
+        "Premiere: " + item.release_date,
+        "Runtime: " + (item.runtime ? item.runtime + " min" : "—"),
+        "Slogan: " + (item.tagline || "—"),
+        "Genre: " + (item.genres?.map(g => movieGenres[g.id] || g.name).join(", ") || "—"),
         "Year: " + item.release_date.slice(0, 4),
-        "Country: " + item.production_countries.map(item => item.name),
-        "Production: Chris Hemsworth",
-        "Camera: Erik Wilson",
-        "Art: Scott Dougan",
-        "Studios: Amazon MGM Studios"
+        "Country: " + (item.production_countries?.map(c => c.name).join(", ") || "—"),
+        "Language: " + (item.original_language?.toUpperCase() || "—"),
+        "Studios: " + productionCompanies,
+        "Budget: " + budget,
+        "Revenue: " + revenue,
+        "Status: " + (item.status || "—"),
+        "Rating: " + (item.vote_average?.toFixed(1) || "—") + " (" + (item.vote_count || 0) + " votes)",
     ];
-
-    console.log(data);
-
 
     data.forEach(elem => {
         const p = document.createElement("p");
-        p.className = "movie-parameters"
-        // let span = p.nextElementSibling
-        // span.textContent = elem
+        p.className = "movie-parameters";
         p.textContent = elem;
         smallData.appendChild(p);
-        // smallData.appendChild(span);
     });
 
-    /* append right side */
     right.appendChild(navigation);
     right.appendChild(title);
     right.appendChild(smallTitle);
@@ -97,11 +93,10 @@ export function DetailedMovie(item) {
     right.appendChild(description);
     right.appendChild(trailerBtn);
 
-    /* append all */
     parentBox.appendChild(left);
     parentBox.appendChild(right);
-    bottomContainer.append(smallData)
-    container.append(parentBox, bottomContainer)
+    bottomContainer.append(smallData);
+    container.append(parentBox, bottomContainer);
 
     return container
 }

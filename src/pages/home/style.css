@@ -624,13 +624,8 @@ body {
 .close-search-window {
     width: 30px;
     position: absolute;
-<<<<<<< HEAD
-    right: 610px;
-    top: 95px;
-=======
     left: 320px;
     top: -45px;
->>>>>>> d370a4c271eaa5ecaa8eb615c4c99eb3fb17048e
 }
 
 
@@ -665,15 +660,6 @@ body {
 }
 
 .moreBtn {
-<<<<<<< HEAD
-  background: white;
-  border: none;
-  padding: 12px 32px;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-=======
     background: white;
     border: none;
     padding: 12px 32px;
@@ -681,4 +667,3 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
->>>>>>> d370a4c271eaa5ecaa8eb615c4c99eb3fb17048e

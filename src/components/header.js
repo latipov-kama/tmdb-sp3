@@ -2,12 +2,6 @@ let close_search_window = document.querySelector(".close-search-window")
 let search_waindow = document.querySelector(".overhide")
 console.log(search_waindow);
 console.log(close_search_window);
-<<<<<<< HEAD
-
-export function header() {
-    let header = document.querySelector("header")
-
-=======
 import { api } from "../libs/api";
 import { render } from "../libs/render";
 import { SearchMovie } from "./searchMovie";
@@ -15,7 +9,6 @@ import { searchPerson } from "./searchPerson";
 export function header() {
     let header = document.querySelector("header")
 
->>>>>>> d370a4c271eaa5ecaa8eb615c4c99eb3fb17048e
     header.innerHTML = `
     <div class="container head-cn">
         <div>
@@ -76,8 +69,6 @@ export function header() {
     headerRight.appendChild(loginBtn);
     headCn.append(headerRight)
 }
-<<<<<<< HEAD
-=======
 let searchTypes = document.querySelectorAll(".type")
 let searchInp = document.querySelector('.search-content')
 let searchResults = document.querySelector(".render-box")
@@ -106,4 +97,3 @@ searchTypes.forEach((type, i) => {
         changeType(type.id)
     }
 })
->>>>>>> d370a4c271eaa5ecaa8eb615c4c99eb3fb17048e

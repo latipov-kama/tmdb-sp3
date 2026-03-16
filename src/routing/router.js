@@ -18,7 +18,8 @@ export async function router() {
 async function renderNotFoundPage(app) {
     console.log(notFound);
 
-    await notFound.view(app)
-    await notFound.loadScripts()
-    await notFound.loadStyles()
+    const response = await fetch('src/pages/error/index.html')
+    const page = await response.text()
+
+    app.innerHTML = page
 }

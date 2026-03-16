@@ -41,6 +41,10 @@ export function header() {
                 <li><a href="/" class="center-link">Search</a></li>
             </ul>
         </div>
+        <div class="header-right">
+            <button class="search"></button>
+            <button class="login"></button>
+        </div>
     </div>`
     let headCn = document.querySelector(".head-cn")
     const headerRight = document.createElement("div");

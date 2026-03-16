@@ -15,7 +15,7 @@ body {
 
     .link-right-box {
         display: flex;
-        align-items: center;
+                align-items: center;
         gap: 40px;
     }
 
@@ -178,7 +178,7 @@ body {
 
 .movie-card {
     /* position: relative; */
-
+    
     width: 100%;
     font-family: 'Segoe UI', sans-serif;
 }
@@ -612,7 +612,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
+    /* backdrop-filter: blur(2px); */
     z-index: 999;
     display: flex;
     justify-content: center;
@@ -624,16 +624,13 @@ body {
 .close-search-window {
     width: 30px;
     position: absolute;
-    left: 320px;
-    top: -45px;
+    right: 610px;
+    top: 95px;
 }
-
-
-.search-box {
+.search-box{
     display: flex;
-    position: relative;
-}
 
+}
 .hide {
     display: none;
 }
@@ -658,12 +655,11 @@ body {
 .movie-card:hover .overlay {
     opacity: 1;
 }
-
 .moreBtn {
-    background: white;
-    border: none;
-    padding: 12px 32px;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
+  background: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
 }

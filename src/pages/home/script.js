@@ -9,9 +9,11 @@ import { api } from '../../libs/api';
 import { Movie } from "../../components/Movie";
 import { header } from '../../components/header';
 import { footer } from '../../components/footer';
-// import { genres } from '../../components/genres';
+import { genres } from '../../components/genres';
 import { Trailer } from '../../components/Trailer';
-import { genres } from '../../components/Genres';
+// import { genres } from '../../components/Genres';
+import { SearchMovie } from '../../components/searchMovie';
+import { searchPerson } from '../../components/searchPerson';
 header()
 footer()
 
@@ -61,6 +63,14 @@ let upcomig_movies_page = document.querySelector(".upcoming-movies-page")
 // let search_waindow = document.querySelector(".overhide")
 // let close_search_window = document.querySelector(".close-search-window")
 
+// search_waindow_btn.onclick = () => {
+//     search_waindow.classList.add("show")
+//     search_waindow.classList.remove("hide")
+// }
+// close_search_window.onclick = () => {
+//     search_waindow.classList.remove("show")
+//     search_waindow.classList.add("hide")
+// }
 
 let swiperWrapper = document.querySelector(".swiper-wrapper")
 let personApi = api.get("/person/popular")

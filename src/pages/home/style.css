@@ -15,7 +15,7 @@ body {
 
     .link-right-box {
         display: flex;
-                align-items: center;
+        align-items: center;
         gap: 40px;
     }
 
@@ -178,7 +178,7 @@ body {
 
 .movie-card {
     /* position: relative; */
-    
+
     width: 100%;
     font-family: 'Segoe UI', sans-serif;
 }
@@ -624,13 +624,21 @@ body {
 .close-search-window {
     width: 30px;
     position: absolute;
+<<<<<<< HEAD
     right: 610px;
     top: 95px;
+=======
+    left: 320px;
+    top: -45px;
+>>>>>>> d370a4c271eaa5ecaa8eb615c4c99eb3fb17048e
 }
-.search-box{
-    display: flex;
 
+
+.search-box {
+    display: flex;
+    position: relative;
 }
+
 .hide {
     display: none;
 }
@@ -655,7 +663,9 @@ body {
 .movie-card:hover .overlay {
     opacity: 1;
 }
+
 .moreBtn {
+<<<<<<< HEAD
   background: white;
   border: none;
   padding: 12px 32px;
@@ -663,3 +673,12 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+=======
+    background: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+>>>>>>> d370a4c271eaa5ecaa8eb615c4c99eb3fb17048e

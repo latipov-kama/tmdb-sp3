@@ -1,26 +1,8 @@
-export const movieGenres = {
-    28: "Action",
-    12: "Adventure",
-    16: "Animation",
-    35: "Comedy",
-    80: "Crime",
-    99: "Documentary",
-    18: "Drama",
-    10751: "Family",
-    14: "Fantasy",
-    36: "History",
-    27: "Horror",
-    10402: "Music",
-    9648: "Mystery",
-    10749: "Romance",
-    878: "Science Fiction",
-    10770: "TV Movie",
-    53: "Thriller",
-    10752: "War",
-    37: "Western"
-}
+import { movieGenres } from "./Movie"
 
-export function Movie(item) {
+export function PopularMovieSlide(item) {
+    const slide = document.createElement("div")
+    slide.className = "swiper-slide"
 
     const movieCard = document.createElement("div")
     movieCard.className = "movie-card"
@@ -46,17 +28,15 @@ export function Movie(item) {
     genres.className = "genres"
     genres.textContent = item.genre_ids.map(id => movieGenres[id] || "Unknown")
 
-    const overlay = document.createElement('div')
-    overlay.className = 'overlay'
+    const overlay = document.createElement("div")
+    overlay.className = "overlay"
 
-    const button = document.createElement('button')
-    button.className = 'moreBtn'
-    button.textContent = 'More'
+    const button = document.createElement("button")
+    button.className = "moreBtn"
+    button.textContent = "More"
 
     overlay.appendChild(button)
-
     poster.appendChild(overlay)
-
     poster.appendChild(img)
     poster.appendChild(rating)
 
@@ -70,5 +50,7 @@ export function Movie(item) {
         window.location.href = "/movie"
         localStorage.setItem("movieId", item.id)
     }
-    return movieCard
+
+    slide.appendChild(movieCard)
+    return slide
 }

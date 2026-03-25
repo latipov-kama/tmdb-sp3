@@ -1,94 +1,202 @@
-import Swiper from 'swiper';
-import { Scrollbar, FreeMode } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/scrollbar';
-import 'swiper/css/free-mode';
-import { render } from '../../libs/render';
-import { popularPeople, popularPeoples } from '../../components/popularity';
-import { api } from '../../libs/api';
-import { Movie } from "../../components/Movie";
-import { header } from '../../components/header';
-import { footer } from '../../components/footer';
-import { genres } from '../../components/genres';
-import { Trailer } from '../../components/Trailer';
-// import { genres } from '../../components/Genres';
-import { SearchMovie } from '../../components/searchMovie';
-import { searchPerson } from '../../components/searchPerson';
+import Swiper from 'swiper'
+import { Scrollbar, FreeMode } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/scrollbar'
+import 'swiper/css/free-mode'
+import { render } from '../../libs/render'
+import { popularPeople, popularPeoples } from '../../components/popularity'
+import { api } from '../../libs/api'
+import { Movie } from "../../components/Movie"
+import { PopularMovieSlide } from "../../components/PopularMovieSlide"
+import { header } from '../../components/header'
+import { footer } from '../../components/footer'
+import { Trailer } from '../../components/Trailer'
+import { genres } from '../../components/genres'
+
 header()
 footer()
 
-const swiper = new Swiper('.trailers__swiper', {
-    direction: 'horizontal',
-    loop: false,
-    modules: [Scrollbar, FreeMode],
-
-    slidesPerView: 4,
-    spaceBetween: 20,
-    grabCursor: true,
-    //   resistanceRatio: 0,
-
-    freeMode: {
-        enabled: true,
-        momentum: true,
-        momentumRatio: 0,
-        momentumVelocityRatio: 0,
-        momentumBounce: false,
-    },
-
-    scrollbar: {
-        el: '.swiper-scrollbar',
-        draggable: true,
-    },
-});
-
-
 let popular_people_box1 = document.querySelector(".pop-people-left-box")
 let popular_people_box2 = document.querySelector(".pop-people-right-box")
-
-let cardBox = document.querySelector(".card-box")
+let cardBox     = document.querySelector(".card-box")
 let geanre_list = document.querySelector(".genre-list")
 
-let popular_movies_box = document.querySelector(".popular-movies-box")
+// Popular Movies swiper
+
+const POPULAR_TOTAL    = 16
+const POPULAR_PER_VIEW = 4
+
+let popularContainer = document.querySelector(".popular-movies-box")
+popularContainer.classList.add("swiper", "popular-movies-swiper")
+
+let popularWrapper = document.createElement("div")
+popularWrapper.className = "swiper-wrapper"
+popularContainer.appendChild(popularWrapper)
+
+let popularSwiper = null
+
+function buildPopularSwiper(movies) {
+    if (popularSwiper) { popularSwiper.destroy(true, true); popularSwiper = null }
+    popularWrapper.innerHTML = ""
+    movies.slice(0, POPULAR_TOTAL).forEach(item => {
+        popularWrapper.appendChild(PopularMovieSlide(item))
+    })
+    popularSwiper = new Swiper(".popular-movies-swiper", {
+        modules: [FreeMode],
+        slidesPerView: POPULAR_PER_VIEW,
+        spaceBetween: 20,
+        speed: 500,
+        grabCursor: true,
+        loop: false,
+    })
+}
+
+function updatePopularPageLabel() {
+    const el = document.querySelector(".popular-movies-page")
+    if (!el || !popularSwiper) return
+    el.textContent = Math.floor(popularSwiper.activeIndex / POPULAR_PER_VIEW) + 1
+}
+
+// Upcoming Movies swiper
+
+const UPCOMING_TOTAL    = 6
+const UPCOMING_PER_VIEW = 3
+
+let upcomingContainer = document.querySelector(".upcoming-movies-box")
+upcomingContainer.classList.add("swiper", "upcoming-movies-swiper")
+
+let upcomingWrapper = document.createElement("div")
+upcomingWrapper.className = "swiper-wrapper"
+upcomingContainer.appendChild(upcomingWrapper)
+
+let upcomingSwiper = null
+
+function buildUpcomingSwiper(movies) {
+    if (upcomingSwiper) { upcomingSwiper.destroy(true, true); upcomingSwiper = null }
+    upcomingWrapper.innerHTML = ""
+    movies.slice(0, UPCOMING_TOTAL).forEach(item => {
+        upcomingWrapper.appendChild(PopularMovieSlide(item))
+    })
+    upcomingSwiper = new Swiper(".upcoming-movies-swiper", {
+        modules: [FreeMode],
+        slidesPerView: UPCOMING_PER_VIEW,
+        spaceBetween: 20,
+        speed: 500,
+        grabCursor: true,
+        loop: false,
+    })
+}
+
+function updateUpcomingPageLabel() {
+    const el = document.querySelector(".upcoming-movies-page")
+    if (!el || !upcomingSwiper) return
+    el.textContent = Math.floor(upcomingSwiper.activeIndex / UPCOMING_PER_VIEW) + 1
+}
+
+// DOM refs
+
 let popular_movies_next_btn = document.querySelector(".popular-movies-next-btn")
 let popular_movies_last_btn = document.querySelector(".popular-movies-last-btn")
-let popular_movies_page = document.querySelector(".popular-movies-page")
+let popular_movies_page_p   = document.querySelector(".popular-movies-page-p")
 
-let upcomig_movies_box = document.querySelector(".upcoming-movies-box")
-let upcomig_movies_next_btn = document.querySelector(".upcoming-movies-next-btn")
-let upcomig_movies_last_btn = document.querySelector(".upcoming-movies-last-btn")
-let upcomig_movies_page = document.querySelector(".upcoming-movies-page")
+let upcoming_movies_next_btn = document.querySelector(".upcoming-movies-next-btn")
+let upcoming_movies_last_btn = document.querySelector(".upcoming-movies-last-btn")
+let upcoming_movies_page_p   = document.querySelector(".upcoming-movies-page-p")
 
+let trailerSwiperWrapper = document.querySelector(".trailers__swiper .swiper-wrapper")
 
-// let search_waindow_btn = document.querySelector(".search")
-// let search_waindow = document.querySelector(".overhide")
-// let close_search_window = document.querySelector(".close-search-window")
+// API calls
 
-// search_waindow_btn.onclick = () => {
-//     search_waindow.classList.add("show")
-//     search_waindow.classList.remove("hide")
-// }
-// close_search_window.onclick = () => {
-//     search_waindow.classList.remove("show")
-//     search_waindow.classList.add("hide")
-// }
+Promise.all([
+    api.get("/person/popular"),
+    api.get("/movie/popular"),
+    api.get("/genre/movie/list"),
+    api.get("/movie/upcoming"),
+])
+.then(([personRes, popularMovieRes, genresRes, upcomingMovieRes]) => {
 
-let swiperWrapper = document.querySelector(".swiper-wrapper")
-let personApi = api.get("/person/popular")
-let popularMovieApi = api.get("movie/popular")
-let genresApi = api.get("/genre/movie/list")
-let upcomigMovieApi = api.get("/movie/upcoming")
-Promise.all([personApi, popularMovieApi, genresApi, upcomigMovieApi])
-.then(([personRes, popularMovieRes, genresRes, upcomigMovieRes])=>{
-    console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
-    
     render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
     render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
-    
     render(popularMovieRes.data.results, cardBox, Movie)
-    render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
-    
-    render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
-    render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
-    
+
+    // Popular swiper
+    buildPopularSwiper(popularMovieRes.data.results)
+    const totalPopularGroups = Math.ceil(POPULAR_TOTAL / POPULAR_PER_VIEW)
+    popular_movies_page_p.innerHTML =
+        `<span class="popular-movies-page">1</span>/${totalPopularGroups}`
+
+    // Upcoming swiper
+    buildUpcomingSwiper(upcomingMovieRes.data.results)
+    const totalUpcomingGroups = Math.ceil(UPCOMING_TOTAL / UPCOMING_PER_VIEW)
+    upcoming_movies_page_p.innerHTML =
+        `<span class="upcoming-movies-page">1</span>/${totalUpcomingGroups}`
+
+    // Trailers swiper
+    render(
+        upcomingMovieRes.data.results.filter(m => m.backdrop_path).slice(0, 10),
+        trailerSwiperWrapper,
+        Trailer
+    )
+
+    new Swiper(".trailers__swiper", {
+        direction: "horizontal",
+        loop: false,
+        modules: [Scrollbar, FreeMode],
+        slidesPerView: 4.5,
+        spaceBetween: 20,
+        grabCursor: true,
+        freeMode: {
+            enabled: true,
+            momentum: true,
+            momentumRatio: 0,
+            momentumVelocityRatio: 0,
+            momentumBounce: false,
+        },
+        scrollbar: {
+            el: ".swiper-scrollbar",
+            draggable: true,
+        },
+    })
+
     render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
- })
+})
+
+// Popular Movies arrows
+
+popular_movies_next_btn.onclick = () => {
+    if (!popularSwiper) return
+    popularSwiper.slideTo(
+        popularSwiper.isEnd ? 0 : popularSwiper.activeIndex + POPULAR_PER_VIEW
+    )
+    setTimeout(updatePopularPageLabel, 520)
+}
+
+popular_movies_last_btn.onclick = () => {
+    if (!popularSwiper) return
+    popularSwiper.slideTo(
+        popularSwiper.isBeginning
+            ? POPULAR_TOTAL - POPULAR_PER_VIEW
+            : popularSwiper.activeIndex - POPULAR_PER_VIEW
+    )
+    setTimeout(updatePopularPageLabel, 520)
+}
+
+// Upcoming Movies arrows
+
+upcoming_movies_next_btn.onclick = () => {
+    if (!upcomingSwiper) return
+    upcomingSwiper.slideTo(
+        upcomingSwiper.isEnd ? 0 : upcomingSwiper.activeIndex + UPCOMING_PER_VIEW
+    )
+    setTimeout(updateUpcomingPageLabel, 520)
+}
+
+upcoming_movies_last_btn.onclick = () => {
+    if (!upcomingSwiper) return
+    upcomingSwiper.slideTo(
+        upcomingSwiper.isBeginning
+            ? UPCOMING_TOTAL - UPCOMING_PER_VIEW
+            : upcomingSwiper.activeIndex - UPCOMING_PER_VIEW
+    )
+    setTimeout(updateUpcomingPageLabel, 520)
+}

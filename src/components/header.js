@@ -105,7 +105,7 @@ export function header() {
         })
     }
 
-    // Open
+    // Open search on button click
     searchBtn.onclick = openSearch
 
     // Close button
